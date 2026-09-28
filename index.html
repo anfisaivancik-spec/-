@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Links</title>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;500&display=swap');
+
+      :root {
+        --bg-dark: #0f0f13;
+        --accent: #ff4757;
+        --text-main: #ffffff;
+        --text-secondary: #b0b0c0;
+        --card-bg: #1a1a24;
+        --neon: #e94560;
+      }
+
+      body {
+        margin: 0;
+        padding: 60px 20px;
+        background-color: var(--bg-dark);
+        color: var(--text-main);
+        font-family: 'Montserrat', sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      /* Центральный заголовок и подпись */
+      .hero {
+        text-align: center;
+        margin-bottom: 60px;
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .hero.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .hero h1 {
+        font-family: 'Playfair Display', serif;
+        font-size: 3.2rem;
+        margin: 0 0 12px 0;
+        color: var(--text-main);
+        text-transform: uppercase;
+        letter-spacing: 4px;
+        position: relative;
+        text-shadow: 0 0 10px rgba(233, 69, 96, 0.6);
+      }
+
+      .hero .subtitle {
+        font-size: 0.95rem;
+        color: var(--text-secondary);
+        text-transform: uppercase;
+        letter-spacing: 2px;
+      }
+
+      /* Карточки */
+      .cards-wrapper {
+        display: flex;
+        gap: 30px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .card {
+        background-color: var(--card-bg);
+        width: 320px;
+        height: 400px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border-radius: 28px; /* мягкие углы */
+        position: relative;
+        overflow: hidden;
+        text-align: center;
+        padding: 30px 20px;
+        opacity: 0;
+        transform: translateY(40px);
+        transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+                    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+        box-shadow: 0 0 8px rgba(233, 69, 96, 0.12);
+      }
+
+      .card::before {
+        content: '';
+        position: absolute;
+        top: -6px;
+        left: -6px;
+        right: -6px;
+        bottom: -6px;
+        border-radius: 26px;
+        border: 1px solid rgba(233, 69, 96, 0.4);
+        pointer-events: none;
+      }
+
+      .card.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .card:hover {
+        transform: translateY(-12px) !important;
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.55),
+                    0 0 30px rgba(233, 69, 96, 0.5);
+      }
+
+      .card h2 {
+        font-family: 'Playfair Display', serif;
+        font-size: 2.2rem;
+        margin: 0 0 20px 0;
+        color: var(--text-main);
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        text-shadow: 0 0 10px rgba(233, 69, 96, 0.5);
+      }
+
+      .btn-go {
+        display: inline-block;
+        padding: 16px 36px;
+        background: transparent;
+        border: 2px solid var(--accent);
+        color: var(--accent);
+        font-weight: 600;
+        cursor: pointer;
+        text-decoration: none;
+        position: relative;
+        overflow: hidden;
+        z-index: 2;
+        transition: all 0.3s ease;
+        box-shadow: 0 0 8px rgba(255, 71, 87, 0.3);
+      }
+
+      .btn-go::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 0;
+        height: 100%;
+        background: var(--accent);
+        transition: width 0.3s ease;
+        z-index: -1;
+      }
+
+      .btn-go span {
+        position: relative;
+        z-index: 2;
+      }
+
+      .btn-go:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 0 24px rgba(255, 71, 87, 0.75);
+      }
+
+      .btn-go:hover::before {
+        width: 100%;
+      }
+
+      .btn-go:hover span {
+        color: #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Центральный блок с названием и подписью -->
+    <div class="hero" id="hero">
+      <h1>U Think About Me</h1>
+      <div class="subtitle">Выбери, куда перейти</div>
+    </div>
+
+    <!-- Два блока: Telegram и TikTok -->
+    <div class="cards-wrapper">
+      <div class="card">
+        <h2>Telegram</h2>
+        <a href="https://t.me/rustexe" class="btn-go" target="_blank">
+          <span>Перейти</span>
+        </a>
+      </div>
+
+      <div class="card">
+        <h2>TikTok</h2>
+        <a href="https://www.tiktok.com/@roumedit?_r=1&_t=ZT-9A6l451TVtu" class="btn-go" target="_blank">
+          <span>Перейти</span>
+        </a>
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const hero = document.getElementById('hero');
+        const cards = document.querySelectorAll('.card');
+
+        // Показываем заголовок чуть раньше
+        setTimeout(() => {
+          hero.classList.add('visible');
+        }, 200);
+
+        // Плавно показываем карточки по очереди
+        cards.forEach((card, index) => {
+          setTimeout(() => {
+            card.classList.add('visible');
+          }, 600 + index * 350);
+        });
+      });
+    </script>
+  </body>
+</html>
