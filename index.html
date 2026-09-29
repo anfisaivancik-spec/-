@@ -2,6 +2,8 @@
 <html lang="ru">
   <head>
     <meta charset="UTF-8" />
+    <!-- Важно: viewport, чтобы сайт не «уезжал» на телефоне -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Links</title>
     <style>
       @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;500&display=swap');
@@ -17,7 +19,8 @@
 
       body {
         margin: 0;
-        padding: 60px 20px;
+        /* На мобильных делаем меньше верхний отступ, чтобы сразу видеть контент */
+        padding: 40px 16px;
         background-color: var(--bg-dark);
         color: var(--text-main);
         font-family: 'Montserrat', sans-serif;
@@ -29,7 +32,7 @@
       /* Центральный заголовок и подпись */
       .hero {
         text-align: center;
-        margin-bottom: 60px;
+        margin-bottom: 40px; /* Чуть меньше на мобильных */
         opacity: 0;
         transform: translateY(30px);
         transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
@@ -43,6 +46,7 @@
 
       .hero h1 {
         font-family: 'Playfair Display', serif;
+        /* Уменьшаем шрифт для телефонов, ниже в медиа-запросах будет точная настройка */
         font-size: 3.2rem;
         margin: 0 0 12px 0;
         color: var(--text-main);
@@ -62,7 +66,7 @@
       /* Карточки */
       .cards-wrapper {
         display: flex;
-        gap: 30px;
+        gap: 20px;       /* Чуть меньше отступ между карточками */
         flex-wrap: wrap;
         justify-content: center;
       }
@@ -75,7 +79,7 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        border-radius: 28px; /* мягкие углы */
+        border-radius: 28px;
         position: relative;
         overflow: hidden;
         text-align: center;
@@ -165,6 +169,78 @@
       .btn-go:hover span {
         color: #fff;
       }
+
+      /* --- МОБИЛЬНАЯ АДАПТАЦИЯ --- */
+      @media (max-width: 768px) {
+        body {
+          padding: 24px 14px;
+        }
+
+        .hero {
+          margin-bottom: 30px;
+        }
+
+        .hero h1 {
+          font-size: 2.4rem; /* Чуть компактнее на планшетах */
+          letter-spacing: 3px;
+        }
+
+        .hero .subtitle {
+          font-size: 0.85rem;
+          letter-spacing: 1.5px;
+        }
+
+        .cards-wrapper {
+          gap: 16px;
+          /* На очень узких экранах карточки будут друг под другом */
+          flex-direction: column;
+          align-items: stretch;
+        }
+
+        .card {
+          width: 100%;       /* На всю ширину */
+          height: auto;      /* Высота по контенту */
+          min-height: 340px; /* Чтобы карточки не «прыгали» */
+          padding: 24px;
+          box-sizing: border-box;
+        }
+
+        .card h2 {
+          font-size: 1.8rem;
+          letter-spacing: 2px;
+        }
+
+        .btn-go {
+          padding: 14px 28px;
+          width: 100%;      /* Кнопка на всю ширину карточки */
+          box-sizing: border-box;
+          text-align: center;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .hero h1 {
+          font-size: 2rem;  /* Ещё компактнее на смартфонах */
+          letter-spacing: 2px;
+        }
+
+        .card {
+          min-height: 300px;
+        }
+
+        .card h2 {
+          font-size: 1.6rem;
+        }
+
+        /* Опционально: отключаем сложные анимации на слабых телефонах */
+        @media (prefers-reduced-motion: reduce) {
+          .hero, .card {
+            opacity: 1;
+            transform: none;
+            transition: none;
+          }
+        }
+      }
     </style>
   </head>
   <body>
@@ -178,14 +254,14 @@
     <div class="cards-wrapper">
       <div class="card">
         <h2>Telegram</h2>
-        <a href="https://t.me/rustexe" class="btn-go" target="_blank">
+        <a href="https://t.me/rustexe" class="btn-go" target="_blank" rel="noopener noreferrer">
           <span>Перейти</span>
         </a>
       </div>
 
       <div class="card">
         <h2>TikTok</h2>
-        <a href="https://www.tiktok.com/@roumedit?_r=1&_t=ZT-9A6l451TVtu" class="btn-go" target="_blank">
+        <a href="https://www.tiktok.com/@roumedit?_r=1&_t=ZT-9A6l451TVtu" class="btn-go" target="_blank" rel="noopener noreferrer">
           <span>Перейти</span>
         </a>
       </div>
